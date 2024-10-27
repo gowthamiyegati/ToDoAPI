@@ -6,6 +6,7 @@ ToDoAPI is a RESTful API built with ASP.NET Core, Entity Framework Core, and SQL
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Design and Coding Decisions](#Design-and-Coding-Decisions)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [API Endpoints](#api-endpoints)
@@ -29,6 +30,18 @@ ToDoAPI is a RESTful API built with ASP.NET Core, Entity Framework Core, and SQL
 - Newtonsoft.Json for JSON handling
 - Dependency Injection and Repository Pattern
 - Weather API integration
+
+## Design and Coding Decisions
+
+- Layered Architecture: The project follows a layered architecture pattern that separates concerns into distinct layers, including the Controller, Service, and Repository layers. This separation makes the code more maintainable and testable.
+
+- Dependency Injection: ASP.NET Core's built-in dependency injection is utilized to manage the dependencies of services and repositories, enhancing the flexibility of the code and promoting loose coupling.
+
+- In-Memory Database for Testing: The use of an in-memory database during testing ensures that tests can run quickly without the need for a persistent database. This allows for fast iteration during development.
+
+- DTOs and Entity Models: The use of Data Transfer Objects (DTOs) separates the API contract from the database models. This provides more control over the data being sent over the network and helps prevent over-posting attacks.
+
+- Error Handling and Responses: The API returns appropriate HTTP status codes for different outcomes (e.g., 200 OK, 404 Not Found). This adherence to RESTful principles improves the API's usability.
 
 ## Project Structure
 
