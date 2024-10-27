@@ -1,0 +1,42 @@
+1) What issues can arise from using async void methods in C#? When should you use async Task instead, and why?
+
+One of the main issue by using async void is in handling exceptions, if any error occurs in asynchrounous code this async void does not allow 
+exceptions to be awaited, and these exceptions could go uncaugt and potentially crashing the application if not handled in global exception handler. And other issue is in Unit test frameworks like NUnit or xUnit can’t await async void methods, so they wouldn’t be able to verify if a background operation completed or if it threw an exception.
+
+When to use async Task means if we want to enable proper asynchrounous flow with proper exception handling and to enable easy way of unit testing. And the main reason to use is to build safer code, more maintainable code, and testable code.
+
+2) Explain the potential problems with using static variables in a multi-threaded or web application context. How can this affect application behavior?
+
+Using static variables can lead to race conditions, shared state issues and memory management issues. Since static variable persist across requests, if multiple threads access or modify them concurrently can lead to data corruption and unpredictable behavior. For example if we take in applications like ToDoAPI, instead of using static variables, dependency injection with Scoped or Transient lifetimes is recommended. This approach ensures proper data isolation, improves application stability, and makes testing and maintenance more manageable.
+
+And practically I have seen the issue using static variables where while doing performance testing for one of our API using Jmeter we observed lot of performance issues when we increased the number of calls in a second. To fix this we have removed all the static variables or methods in the API code.
+
+3) What is the difference between the == operator and the .Equals() method in C# when comparing objects?
+
+Main difference is == compares reference equality by default. On the other hand, .Equals() is intended for value equality, where we can check if two instances have the same property values. Generally, .Equals() is used for logical comparisons, while == can vary based on implementation. And the other difference is == operator is null-safe and does not throw exception if one side is null, where as .Equals() will thrown an exception in case of null reference.
+
+4) What happens if you do not implement the IDisposable interface for a class that uses unmanaged resources. What are the consequences, and how can you prevent them?
+
+Garbage collector cannot clean unmanaged resources so if IDisposable interface has not been implemented then it can lead to memory leaks and also can exhaust system limits . This will make the application slow or completeley crash. To prevent these issues implement IDisposable interface and override the dispose method to explicity release unmanaged resources.
+Other way to clean is using try-finally where finally block consists of unmanaged clean up resource code but implementing  IDisposable is generally a better approach.
+
+5) Do you see any issues with this LINQ query?
+public class Book
+{
+public int Id { get; set; }
+public string Title { get; set; }
+}
+var books = dbContext.Books
+.Where(p => IsRecommended(p.Title))
+.ToList();
+bool IsRecommended(string title)
+{
+return title.StartsWith("A") && title.EndsWith("Z");
+}
+
+Here the LINQ query is referencing a method IsRecommended, as entity framework does not know how to translate this method to SQL and this could lead to run time error.
+Below is the proper way to use LINQ query and remove IsRecommended method.
+
+var books = dbContext.Books
+    .Where(p => p.Title.StartsWith("A") && p.Title.EndsWith("Z"))
+    .ToList();
