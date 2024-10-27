@@ -49,7 +49,7 @@ ToDoAPI is a RESTful API built with ASP.NET Core, Entity Framework Core, and SQL
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/ToDoAPI.git
+    git clone https://github.com/gowthamiyegati/ToDoAPI.git
     cd ToDoAPI
     ```
 
