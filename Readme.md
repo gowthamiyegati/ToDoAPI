@@ -12,8 +12,6 @@ ToDoAPI is a RESTful API built with ASP.NET Core, Entity Framework Core, and SQL
 - [API Endpoints](#api-endpoints)
 - [Testing with NUnit](#testing-with-nunit)
 - [Configuration](#configuration)
-- [Database Migrations](#database-migrations)
-- [Contributing](#contributing)
 
 ## Features
 
