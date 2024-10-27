@@ -82,7 +82,7 @@ ToDoAPI is a RESTful API built with ASP.NET Core, Entity Framework Core, and SQL
 
 ### Running the Project
 
-After running the above commands, the API should be accessible at `https://localhost:5001`.
+After running the above commands, the API should be accessible at `https://localhost:[localport]`.
 
 ## API Endpoints
 
